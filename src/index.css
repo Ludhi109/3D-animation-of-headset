@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-blue: #00f2ff;
+  --color-sony-black: #050505;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  
+  --font-inter: "Inter", sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  background-color: var(--color-sony-black);
+  font-family: var(--font-inter);
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--color-sony-black);
+  color: white;
+}
+
+canvas {
+  touch-action: none;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #00f2ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.neon-glow {
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+}
+
+.neon-text-glow {
+  text-shadow: 0 0 10px rgba(0, 242, 255, 0.8);
+}
