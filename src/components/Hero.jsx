@@ -82,7 +82,7 @@ export const Hero = () => {
           Precision Engineering
         </motion.h2>
         
-        <h1 ref={titleRef} className="text-7xl md:text-[8.5rem] font-bold tracking-tighter leading-[0.8] mb-12 flex flex-wrap justify-center perspective-1000 relative drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+        <h1 ref={titleRef} className="text-7xl md:text-[8.5rem] font-bold tracking-tighter leading-[0.8] mb-16 flex flex-wrap justify-center perspective-1000 relative drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">
           <div className="w-full text-white overflow-hidden pb-2">
             {splitText("SONY")}
           </div>
@@ -95,7 +95,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="max-w-xl mx-auto text-gray-300 text-lg md:text-xl font-light mb-16 leading-relaxed bg-black/20 backdrop-blur-sm rounded-2xl p-4"
+          className="max-w-xl mx-auto text-gray-300 text-lg md:text-xl font-light mb-24 leading-relaxed bg-black/40 backdrop-blur-md rounded-3xl p-6 border border-white/5"
         >
           Experience the world's most advanced noise cancelling. <br className="hidden md:block" /> 
           Engineered for absolute perfection.
@@ -105,7 +105,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="flex flex-col md:flex-row gap-8 justify-center items-center"
+          className="flex flex-col md:flex-row gap-10 justify-center items-center mt-6"
         >
           <button 
             onClick={() => scrollToSection("pricing")}
