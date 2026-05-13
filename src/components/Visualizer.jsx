@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Music, Mic, Volume2 } from "lucide-react";
 import { Headset3D } from "./Headset3D";
 import { ErrorBoundary } from "./ErrorBoundary";
-import customBg from "../assets/custom-bg.jpg";
+import userCustomBg from "../assets/user-custom-bg.jpg";
 
 export const Visualizer = () => {
   const [activeMode, setActiveMode] = useState(0);
@@ -38,7 +38,7 @@ export const Visualizer = () => {
       {/* Custom Background Image */}
       <div className="absolute inset-0 z-0 opacity-20">
         <img 
-          src={customBg} 
+          src={userCustomBg} 
           alt="Audio Background" 
           className="w-full h-full object-cover mix-blend-screen"
         />

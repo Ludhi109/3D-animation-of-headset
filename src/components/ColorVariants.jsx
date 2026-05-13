@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import customBg from "../assets/custom-bg.jpg";
+import userCustomBg from "../assets/user-custom-bg.jpg";
 
 const colors = [
   { name: "Midnight Black", hex: "#050505", class: "bg-black" },
@@ -13,7 +13,7 @@ export const ColorVariants = ({ activeColor, onColorChange }) => {
       {/* Custom Background Image - High Visibility */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
         <img 
-          src={customBg} 
+          src={userCustomBg} 
           alt="Color Selection Backdrop" 
           className="w-full h-full object-cover scale-110 mix-blend-lighten"
         />
