@@ -34,7 +34,7 @@ export const Visualizer = () => {
   ];
 
   return (
-    <section id="visualizer" className="py-40 bg-black relative overflow-hidden">
+    <section id="visualizer" className="py-60 bg-black relative overflow-hidden">
       {/* Custom Background Image */}
       <div className="absolute inset-0 z-0 opacity-20">
         <img 
@@ -44,7 +44,7 @@ export const Visualizer = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10 pt-24">
         <div className="z-10">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
