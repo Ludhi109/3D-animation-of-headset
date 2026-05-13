@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Music, Mic, Volume2 } from "lucide-react";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Music, Mic, Volume2 } from "lucide-react";
-
 // Use the same premium image as the Hero for consistency
 const headsetImage = "https://www.sony.co.in/image/5d02da5df552836db894cead8afc2098?fmt=pjpeg&wid=1200&hei=470&bgcolor=F1F5F9&qlt=43";
 
