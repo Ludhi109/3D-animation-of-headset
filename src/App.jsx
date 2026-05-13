@@ -304,7 +304,7 @@ function App() {
           <Hero />
         </div>
         
-        <div id="features" className="relative z-10 py-24">
+        <div id="features" className="relative z-10 py-20">
           <Features />
         </div>
 
@@ -312,7 +312,7 @@ function App() {
           <ExplodedView />
         </div>
         
-        <div id="visualizer" className="relative z-10 py-24">
+        <div id="visualizer" className="relative z-10 py-20">
           <Visualizer />
         </div>
         
