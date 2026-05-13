@@ -58,20 +58,18 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-sony-black/40" />
       </div>
 
-      {/* Premium Headset Visual - Full Screen & Cinematic */}
+      {/* Premium Headset Visual - Guaranteed Full View */}
       <motion.div 
-        initial={{ scale: 1.2, opacity: 0 }}
-        animate={{ scale: 1.05, opacity: 0.8 }}
-        transition={{ duration: 2, ease: "easeOut" }}
-        className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute inset-0 z-0 flex items-center justify-center p-12 md:p-32 pointer-events-none"
       >
         <img 
-          src={heroImage} 
-          alt="Sony WH-1000XM5" 
-          className="w-full h-[85vh] object-contain mix-blend-lighten relative z-10"
+          src="https://www.sony.co.in/image/5d02da5df552836db894cead8afc2098?fmt=pjpeg&wid=1200&hei=470&bgcolor=F1F5F9&qlt=43" 
+          alt="Sony WH-1000XM5 Full" 
+          className="w-full h-full object-contain mix-blend-lighten drop-shadow-[0_0_50px_rgba(0,0,0,0.5)]"
         />
-        {/* Cinematic Dark Overlay */}
-        <div className="absolute inset-0 bg-sony-black/20 z-0" />
       </motion.div>
 
       <div className="z-10 flex flex-col items-center mt-[-5vh]">
