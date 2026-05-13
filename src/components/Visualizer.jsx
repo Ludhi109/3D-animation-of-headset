@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Music, Mic, Volume2 } from "lucide-react";
 import { Headset3D } from "./Headset3D";
 import { ErrorBoundary } from "./ErrorBoundary";
+import customBg from "../assets/custom-bg.jpg";
 
 export const Visualizer = () => {
   const [activeMode, setActiveMode] = useState(0);
@@ -34,7 +35,16 @@ export const Visualizer = () => {
 
   return (
     <section id="visualizer" className="py-40 bg-black relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      {/* Custom Background Image */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <img 
+          src={customBg} 
+          alt="Audio Background" 
+          className="w-full h-full object-cover mix-blend-screen"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
         <div className="z-10">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}

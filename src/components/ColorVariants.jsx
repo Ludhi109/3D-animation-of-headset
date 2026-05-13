@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import customBg from "../assets/custom-bg.jpg";
 
 const colors = [
   { name: "Midnight Black", hex: "#050505", class: "bg-black" },
@@ -9,12 +10,12 @@ const colors = [
 export const ColorVariants = ({ activeColor, onColorChange }) => {
   return (
     <section className="py-40 border-y border-white/5 relative overflow-hidden flex flex-col items-center">
-      {/* Background Full Headset Image - High Visibility Re-applied */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-60 pointer-events-none">
+      {/* Custom Background Image - High Visibility */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
         <img 
-          src="https://www.sony.co.in/image/5d02da5df552836db894cead8afc2098?fmt=pjpeg&wid=1200&hei=470&bgcolor=F1F5F9&qlt=43" 
-          alt="Headset Backdrop Full" 
-          className="w-full h-full object-contain scale-110 mix-blend-lighten"
+          src={customBg} 
+          alt="Color Selection Backdrop" 
+          className="w-full h-full object-cover scale-110 mix-blend-lighten"
         />
       </div>
 
