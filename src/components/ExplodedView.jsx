@@ -1,6 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ScrollSequence } from "./ScrollSequence";
 
 const components = [
   { name: "01 / EAR CUSHIONS", desc: "Pressure-relieving soft fit leather for long-lasting comfort." },
@@ -13,47 +11,31 @@ const components = [
 
 export const ExplodedView = () => {
   const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end end"]
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-  const textOpacity1 = useTransform(scrollYProgress, [0.1, 0.2, 0.4, 0.5], [0, 1, 1, 0]);
-  const textOpacity2 = useTransform(scrollYProgress, [0.5, 0.6, 0.8, 0.9], [0, 1, 1, 0]);
 
   return (
-    <section ref={targetRef} className="relative h-[600vh]">
-      {/* High-fidelity Image Sequence */}
-      <ScrollSequence />
+    <section ref={targetRef} className="relative h-[250vh]">
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-sony-black/30" />
 
-      {/* Overlay Content */}
-      <div className="absolute inset-0 z-20 pointer-events-none">
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-4">
-          
-
-
-          <motion.div 
-            style={{ opacity: textOpacity2 }}
-            className="absolute inset-0 flex items-center justify-center px-4"
-          >
-            <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {components.map((c, i) => (
-                <div
-                  key={i}
-                  className="p-8 glass rounded-3xl border border-white/5 backdrop-blur-xl"
-                >
-                  <h4 className="text-neon-blue font-bold text-xs tracking-widest mb-3 uppercase">{c.name}</h4>
-                  <p className="text-sm text-gray-300 font-light leading-relaxed">{c.desc}</p>
-                </div>
-              ))}
+      {/* Sticky Content Overlay */}
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center px-4 overflow-hidden pointer-events-none">
+        <div className="text-center mb-16 relative z-30">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-2xl">Precision Components</h2>
+          <p className="text-gray-400 font-light max-w-lg mx-auto">Scroll to see the engineering masterpiece disassembled in real-time.</p>
+        </div>
+        
+        <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-30">
+          {components.map((c, i) => (
+            <div
+              key={i}
+              className="p-8 glass rounded-[2rem] border border-white/5 backdrop-blur-xl"
+            >
+              <h4 className="text-neon-blue font-bold text-xs tracking-widest mb-3 uppercase">{c.name}</h4>
+              <p className="text-sm text-gray-300 font-light leading-relaxed">{c.desc}</p>
             </div>
-          </motion.div>
-
+          ))}
         </div>
       </div>
     </section>
   );
 };
-
-

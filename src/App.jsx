@@ -12,7 +12,6 @@ import { Navbar } from "./components/Navbar";
 import { CartSidebar } from "./components/CartSidebar";
 import { CheckoutForm } from "./components/CheckoutForm";
 import { ErrorBoundary } from "./components/ErrorBoundary";
-import Lenis from "@studio-freight/lenis";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -155,36 +154,6 @@ function App() {
   };
 
   useEffect(() => {
-    // Initialize Lenis Smooth Scroll
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // GSAP ScrollTrigger Integration
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2500);
@@ -226,10 +195,9 @@ function App() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       
-      // Explicit visibility logic: Hide in Hero (first screen)
-      // Show only when approaching or inside the ExplodedView section
-      const isNearExploded = scrollY > windowHeight * 0.8 && scrollY < windowHeight * 7;
-      setIs3DVisible(isNearExploded);
+      // Show 3D model after Hero section and hide before Testimonials
+      const shouldShow3D = scrollY > windowHeight * 0.5 && scrollY < windowHeight * 10;
+      setIs3DVisible(shouldShow3D);
     };
 
     window.addEventListener("scroll", updateVisibility);
@@ -238,8 +206,8 @@ function App() {
     if (explodedSectionRef.current) {
       ScrollTrigger.create({
         trigger: explodedSectionRef.current,
-        start: "top top",
-        end: "bottom bottom",
+        start: "top center",
+        end: "bottom center",
         scrub: 1,
         onUpdate: (self) => {
           setExplosionFactor(self.progress);
@@ -334,7 +302,7 @@ function App() {
           <Features />
         </div>
 
-        <div ref={explodedSectionRef} id="exploded" className="relative z-10">
+        <div ref={explodedSectionRef} id="exploded" className="relative z-10 h-[150vh]">
           <ExplodedView />
         </div>
         
