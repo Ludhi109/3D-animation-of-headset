@@ -72,7 +72,8 @@ const Model = ({ mouse, explosionFactor, color }) => {
           ).normalize();
         }
         
-        if (child.name.toLowerCase().includes("body") || child.name.toLowerCase().includes("frame")) {
+        // Robust color application for the new model
+        if (child.material && !child.name.toLowerCase().includes("logo") && !child.name.toLowerCase().includes("cable")) {
           child.material.color.set(color);
         }
       }
