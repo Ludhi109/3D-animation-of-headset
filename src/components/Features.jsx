@@ -27,10 +27,6 @@ const features = [
 export const Features = () => {
   return (
     <section className="py-24 px-4 max-w-7xl mx-auto relative z-10">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">Precision Engineering</h2>
-        <div className="w-24 h-1 bg-neon-blue mx-auto" />
-      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map((feature, index) => (
