@@ -54,22 +54,22 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Hero UI - Improved Spacing & Typography */}
-      <div className="relative z-10 flex flex-col items-center text-center px-4 w-full pt-10">
+      {/* Hero UI - Ultra-Spacious Layout */}
+      <div className="relative z-10 flex flex-col items-center text-center px-4 w-full pt-20">
         <motion.h1 
-          className="hero-text text-[12vw] md:text-[10rem] font-bold tracking-tighter leading-none text-white mb-8 drop-shadow-[0_0_80px_rgba(255,255,255,0.1)]"
+          className="hero-text text-[10vw] md:text-[8rem] font-bold tracking-tighter leading-none text-white mb-12 drop-shadow-[0_0_80px_rgba(255,255,255,0.1)]"
         >
           WH-1000XM5
         </motion.h1>
 
-        <motion.div className="hero-text max-w-2xl px-10 py-8 rounded-3xl bg-black/40 backdrop-blur-md border border-white/10 mb-20">
+        <motion.div className="hero-text max-w-2xl px-12 py-10 rounded-[3rem] bg-black/40 backdrop-blur-md border border-white/10 mb-28">
           <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed">
             Immerse yourself in a world of pure sound. Precision engineered <br className="hidden md:block" /> 
             for those who demand nothing but absolute perfection.
           </p>
         </motion.div>
 
-        <motion.div className="hero-text flex flex-col md:flex-row gap-12 items-center mb-10">
+        <motion.div className="hero-text flex flex-col md:flex-row gap-16 items-center mb-16">
           <button 
             onClick={() => scrollToSection("pricing")}
             className="px-14 py-6 bg-neon-blue text-black font-bold rounded-full hover:scale-105 transition-all shadow-[0_0_60px_rgba(0,242,255,0.5)] uppercase tracking-widest text-xs"
