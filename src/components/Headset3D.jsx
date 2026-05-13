@@ -18,13 +18,15 @@ const Model = ({ mouse, explosionFactor, color, hologram }) => {
         child.receiveShadow = !hologram;
         
         if (hologram) {
-          // Holographic / Wireframe Style
-          child.material.wireframe = true;
+          // Holographic / Silhouette Glow Style (Matching screenshot)
+          child.material.wireframe = false;
           child.material.transparent = true;
-          child.material.opacity = 0.15;
+          child.material.opacity = 0.4;
           child.material.color.set("#00f2ff");
           child.material.emissive = new THREE.Color("#00f2ff");
-          child.material.emissiveIntensity = 0.5;
+          child.material.emissiveIntensity = 2.0;
+          child.material.roughness = 0;
+          child.material.metalness = 1;
         } else {
           // Premium Matte Black Finish
           child.material.roughness = 0.6;
