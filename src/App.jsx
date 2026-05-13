@@ -192,6 +192,14 @@ function App() {
     });
 
     ScrollTrigger.create({
+      id: "heroTrigger",
+      trigger: "#hero",
+      start: "top top",
+      end: "bottom top",
+      onToggle: (self) => updateVisibility()
+    });
+
+    ScrollTrigger.create({
       id: "explodedTrigger",
       trigger: "#exploded",
       start: "top center",
@@ -200,8 +208,10 @@ function App() {
     });
 
     const updateVisibility = () => {
+      const heroActive = ScrollTrigger.getById("heroTrigger")?.isActive;
       const explodedActive = ScrollTrigger.getById("explodedTrigger")?.isActive;
-      setIs3DVisible(!explodedActive);
+      // Show 3D only during ExplodedView, use static image for Hero
+      setIs3DVisible(explodedActive && !heroActive);
     };
 
     if (explodedSectionRef.current) {
