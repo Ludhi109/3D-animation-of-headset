@@ -308,11 +308,11 @@ function App() {
           <Features />
         </div>
 
-        <div id="exploded" className="relative z-10">
+        <div id="exploded" className="relative z-10 mb-40">
           <ExplodedView />
         </div>
         
-        <div id="visualizer" className="relative z-10">
+        <div id="visualizer" className="relative z-10 py-20">
           <Visualizer />
         </div>
         

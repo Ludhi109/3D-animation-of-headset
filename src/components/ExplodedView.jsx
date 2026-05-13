@@ -41,7 +41,7 @@ export const ExplodedView = () => {
 
           <motion.div 
             style={{ opacity: cardsOpacity }}
-            className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-32 px-4"
           >
             {components.map((c, i) => (
               <div
