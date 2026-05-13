@@ -71,7 +71,7 @@ export const Hero = () => {
             </motion.div>
         </motion.div>
 
-        <motion.div className="hero-text flex flex-col md:flex-row gap-12 items-center mb-24">
+        <motion.div className="hero-text flex flex-col md:flex-row gap-12 items-center mb-16">
           <button 
             onClick={() => scrollToSection("pricing")}
             className="px-12 py-5 bg-neon-blue text-black font-bold rounded-full hover:scale-105 transition-all shadow-[0_0_60px_rgba(0,242,255,0.5)] uppercase tracking-widest text-xs"
@@ -92,9 +92,9 @@ export const Hero = () => {
       </div>
 
       {/* Aesthetic Accents - Absolute Bottom */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
         <span className="text-[9px] tracking-[0.5em] text-neon-blue uppercase font-bold">Explore the Craft</span>
-        <div className="w-[1px] h-8 bg-gradient-to-b from-neon-blue to-transparent animate-pulse" />
+        <div className="w-[1px] h-6 bg-gradient-to-b from-neon-blue to-transparent animate-pulse" />
       </div>
     </section>
   );
