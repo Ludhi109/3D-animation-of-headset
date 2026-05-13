@@ -56,6 +56,9 @@ export const ExplodedView = () => {
 
         </div>
       </div>
+
+      {/* Spacer to ensure animation finishes before next section */}
+      <div className="h-[100vh]" />
     </section>
   );
 };

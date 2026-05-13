@@ -191,21 +191,20 @@ function App() {
       el.addEventListener("mouseleave", handleUnhover);
     });
 
+    // Visibility and Animation Logic
     const updateVisibility = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       
-      // Hide 3D model during Hero and ExplodedView (which uses image sequence)
-      // Show for other sections
-      const isExplodedActive = scrollY > windowHeight * 1.5 && scrollY < windowHeight * 6.5;
+      // Dynamic visibility based on scroll position
       const isHeroActive = scrollY < windowHeight * 0.5;
-      
-      setIs3DVisible(!isHeroActive && !isExplodedActive);
+      setIs3DVisible(!isHeroActive);
     };
 
     window.addEventListener("scroll", updateVisibility);
     updateVisibility();
 
+    // The explosion effect is now handled within the ExplodedView section itself or via this ref
     if (explodedSectionRef.current) {
       ScrollTrigger.create({
         trigger: explodedSectionRef.current,
@@ -305,7 +304,7 @@ function App() {
           <Features />
         </div>
 
-        <div ref={explodedSectionRef} id="exploded" className="relative z-10 h-[150vh]">
+        <div id="exploded" className="relative z-10">
           <ExplodedView />
         </div>
         
