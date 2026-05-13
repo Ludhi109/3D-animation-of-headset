@@ -71,17 +71,17 @@ export const Hero = () => {
             </motion.div>
         </motion.div>
 
-        <motion.div className="hero-text flex flex-col md:flex-row gap-16 items-center mb-10">
+        <motion.div className="hero-text flex flex-col md:flex-row gap-12 items-center mb-24">
           <button 
             onClick={() => scrollToSection("pricing")}
-            className="px-14 py-6 bg-neon-blue text-black font-bold rounded-full hover:scale-105 transition-all shadow-[0_0_60px_rgba(0,242,255,0.5)] uppercase tracking-widest text-xs"
+            className="px-12 py-5 bg-neon-blue text-black font-bold rounded-full hover:scale-105 transition-all shadow-[0_0_60px_rgba(0,242,255,0.5)] uppercase tracking-widest text-xs"
           >
             Pre-order Now
           </button>
           
           <button 
             onClick={() => scrollToSection("visualizer")}
-            className="px-14 py-6 glass text-white font-medium rounded-full border border-white/20 hover:bg-white/10 transition-all flex items-center gap-4 group"
+            className="px-12 py-5 glass text-white font-medium rounded-full border border-white/20 hover:bg-white/10 transition-all flex items-center gap-4 group"
           >
             <span className="uppercase tracking-widest text-xs">Watch Film</span>
             <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-neon-blue transition-colors">
@@ -91,10 +91,10 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Aesthetic Accents */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-50">
-        <span className="text-[10px] tracking-[0.6em] text-neon-blue uppercase font-bold">Explore the Craft</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-neon-blue to-transparent animate-pulse" />
+      {/* Aesthetic Accents - Absolute Bottom */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+        <span className="text-[9px] tracking-[0.5em] text-neon-blue uppercase font-bold">Explore the Craft</span>
+        <div className="w-[1px] h-8 bg-gradient-to-b from-neon-blue to-transparent animate-pulse" />
       </div>
     </section>
   );
