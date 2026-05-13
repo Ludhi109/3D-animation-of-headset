@@ -195,9 +195,12 @@ function App() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       
-      // Show 3D model after Hero section and hide before Testimonials
-      const shouldShow3D = scrollY > windowHeight * 0.5 && scrollY < windowHeight * 10;
-      setIs3DVisible(shouldShow3D);
+      // Hide 3D model during Hero and ExplodedView (which uses image sequence)
+      // Show for other sections
+      const isExplodedActive = scrollY > windowHeight * 1.5 && scrollY < windowHeight * 6.5;
+      const isHeroActive = scrollY < windowHeight * 0.5;
+      
+      setIs3DVisible(!isHeroActive && !isExplodedActive);
     };
 
     window.addEventListener("scroll", updateVisibility);
