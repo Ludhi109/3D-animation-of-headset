@@ -292,7 +292,7 @@ function App() {
       <Navbar cartCount={cart.length} onCartClick={() => setIsCartOpen(true)} />
       
       <div className={`transition-opacity duration-1000 ${is3DVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <ErrorBoundary fallback={<div className="fixed inset-0 flex items-center justify-center bg-sony-black text-neon-blue text-center p-4">Model failed to load.<br/>Falling back to premium experience.</div>}>
+        <ErrorBoundary fallback={<div className="fixed inset-0 bg-sony-black" />}>
           <Suspense fallback={null}>
             <Experience explosionFactor={explosionFactor} color={headsetColor} />
           </Suspense>
