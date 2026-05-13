@@ -12,6 +12,7 @@ import { Navbar } from "./components/Navbar";
 import { CartSidebar } from "./components/CartSidebar";
 import { CheckoutForm } from "./components/CheckoutForm";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import Lenis from "@studio-freight/lenis";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -154,6 +155,36 @@ function App() {
   };
 
   useEffect(() => {
+    // Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // GSAP ScrollTrigger Integration
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2500);
@@ -191,28 +222,18 @@ function App() {
       el.addEventListener("mouseleave", handleUnhover);
     });
 
-    ScrollTrigger.create({
-      id: "heroTrigger",
-      trigger: "#hero",
-      start: "top top",
-      end: "bottom top",
-      onToggle: (self) => updateVisibility()
-    });
-
-    ScrollTrigger.create({
-      id: "explodedTrigger",
-      trigger: "#exploded",
-      start: "top center",
-      end: "bottom center",
-      onToggle: (self) => updateVisibility()
-    });
-
     const updateVisibility = () => {
-      const heroActive = ScrollTrigger.getById("heroTrigger")?.isActive;
-      const explodedActive = ScrollTrigger.getById("explodedTrigger")?.isActive;
-      // Show 3D only during ExplodedView, use static image for Hero
-      setIs3DVisible(explodedActive && !heroActive);
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Explicit visibility logic: Hide in Hero (first screen)
+      // Show only when approaching or inside the ExplodedView section
+      const isNearExploded = scrollY > windowHeight * 0.8 && scrollY < windowHeight * 7;
+      setIs3DVisible(isNearExploded);
     };
+
+    window.addEventListener("scroll", updateVisibility);
+    updateVisibility();
 
     if (explodedSectionRef.current) {
       ScrollTrigger.create({

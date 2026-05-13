@@ -95,7 +95,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="max-w-xl mx-auto text-gray-300 text-lg md:text-xl font-light mb-24 leading-relaxed bg-black/40 backdrop-blur-md rounded-3xl p-6 border border-white/5"
+          className="max-w-xl mx-auto text-gray-300 text-lg md:text-xl font-light mb-20 leading-relaxed bg-black/40 backdrop-blur-md rounded-3xl p-8 border border-white/5"
         >
           Experience the world's most advanced noise cancelling. <br className="hidden md:block" /> 
           Engineered for absolute perfection.
@@ -105,7 +105,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="flex flex-col md:flex-row gap-10 justify-center items-center mt-6"
+          className="flex flex-col md:flex-row gap-10 justify-center items-center mt-10"
         >
           <button 
             onClick={() => scrollToSection("pricing")}
@@ -131,10 +131,10 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
         <span className="text-[10px] tracking-[0.4em] text-gray-500 uppercase">Scroll to Discover</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-neon-blue to-transparent animate-pulse" />
+        <div className="w-[1px] h-10 bg-gradient-to-b from-neon-blue to-transparent animate-pulse" />
       </motion.div>
     </section>
   );
