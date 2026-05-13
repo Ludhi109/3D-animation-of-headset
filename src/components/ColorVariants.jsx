@@ -8,11 +8,20 @@ const colors = [
 
 export const ColorVariants = ({ activeColor, onColorChange }) => {
   return (
-    <section className="py-24 border-y border-white/5 bg-sony-black/50">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12">Choose Your Aesthetic</h2>
+    <section className="py-40 border-y border-white/5 relative overflow-hidden flex flex-col items-center">
+      {/* Background Full Headset Image */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none">
+        <img 
+          src="https://www.sony.co.in/image/5d02da5df552836db894cead8afc2098?fmt=pjpeg&wid=1200&hei=470&bgcolor=F1F5F9&qlt=43" 
+          alt="Headset Backdrop" 
+          className="w-full h-full object-contain mix-blend-screen"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
+        <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight">Choose Your Aesthetic</h2>
         
-        <div className="flex justify-center gap-12 items-center">
+        <div className="flex flex-wrap justify-center gap-12 md:gap-20 items-center">
             {colors.map((color) => (
               <div 
                 key={color.name}
@@ -20,27 +29,26 @@ export const ColorVariants = ({ activeColor, onColorChange }) => {
               >
                 <div 
                   onClick={() => onColorChange(color.hex)}
-                  className={`w-20 h-20 rounded-full border-2 cursor-pointer transition-all duration-500 relative group ${activeColor === color.hex ? "border-neon-blue scale-110 shadow-[0_0_30px_rgba(0,242,255,0.4)]" : "border-white/5 hover:border-white/20"}`}
+                  className={`w-24 h-24 rounded-full border-2 cursor-pointer transition-all duration-500 relative group ${activeColor === color.hex ? "border-neon-blue scale-110 shadow-[0_0_40px_rgba(0,242,255,0.4)]" : "border-white/10 hover:border-white/30"}`}
                   style={{ backgroundColor: color.hex }}
                 >
                   {activeColor === color.hex && (
                     <motion.div 
                       layoutId="selection-ring"
-                      className="absolute -inset-3 border border-neon-blue rounded-full"
+                      className="absolute -inset-4 border border-neon-blue rounded-full"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-neon-blue rounded-full shadow-[0_0_10px_#00f2ff]" />
+                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-neon-blue rounded-full shadow-[0_0_15px_#00f2ff]" />
                     </motion.div>
                   )}
                 </div>
-                <span className={`text-[10px] tracking-[0.3em] uppercase transition-colors duration-500 ${activeColor === color.hex ? "text-neon-blue font-bold" : "text-gray-500"}`}>
+                <span className={`text-[11px] tracking-[0.4em] uppercase transition-all duration-500 ${activeColor === color.hex ? "text-white font-bold opacity-100" : "text-gray-500 opacity-60"}`}>
                   {color.name}
                 </span>
               </div>
             ))}
-
         </div>
       </div>
     </section>
