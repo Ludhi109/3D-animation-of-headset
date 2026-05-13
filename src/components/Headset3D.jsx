@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 const MODEL_URL = "https://raw.githubusercontent.com/antony-monu/react-three-fiber-headphones/main/public/models/headphones.glb";
 
-const Model = ({ mouse, explosionFactor, color, neonGlow }) => {
+const Model = ({ mouse, explosionFactor, color, hologram }) => {
   const { scene } = useGLTF(MODEL_URL);
   const modelRef = useRef();
 
@@ -14,85 +14,64 @@ const Model = ({ mouse, explosionFactor, color, neonGlow }) => {
     scene.traverse((child) => {
       if (child.isMesh) {
         child.material = child.material.clone();
-        child.castShadow = true;
-        child.receiveShadow = true;
+        child.castShadow = !hologram;
+        child.receiveShadow = !hologram;
         
-        // Premium Matte Black Finish
-        child.material.roughness = 0.6;
-        child.material.metalness = 0.2;
-        
-        // Apply Base Color
-        if (child.material && !child.name.toLowerCase().includes("logo") && !child.name.toLowerCase().includes("cable")) {
+        if (hologram) {
+          // Holographic / Wireframe Style
+          child.material.wireframe = true;
+          child.material.transparent = true;
+          child.material.opacity = 0.15;
+          child.material.color.set("#00f2ff");
+          child.material.emissive = new THREE.Color("#00f2ff");
+          child.material.emissiveIntensity = 0.5;
+        } else {
+          // Premium Matte Black Finish
+          child.material.roughness = 0.6;
+          child.material.metalness = 0.2;
           child.material.color.set(color);
-          
-          // Apply Neon Blue Edge Glow if requested
-          if (neonGlow) {
-            child.material.emissive = new THREE.Color("#00f2ff");
-            child.material.emissiveIntensity = 0.3;
-          }
         }
       }
     });
-  }, [scene, color, neonGlow]);
+  }, [scene, color, hologram]);
 
   useFrame((state) => {
     if (modelRef.current) {
-      // Smooth Mouse Interaction
-      const targetX = mouse.current[1] * 0.3;
-      const targetY = mouse.current[0] * 0.3;
+      const targetX = mouse.current[1] * 0.2;
+      const targetY = mouse.current[0] * 0.2;
       modelRef.current.rotation.x = THREE.MathUtils.lerp(modelRef.current.rotation.x, targetX, 0.05);
       modelRef.current.rotation.y = THREE.MathUtils.lerp(modelRef.current.rotation.y, targetY, 0.05);
       
-      // Anti-Gravity Floating Motion
-      modelRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.2;
+      // Floating Motion
+      modelRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.3;
       
-      // Explosion logic for other sections
-      if (explosionFactor > 0) {
-        modelRef.current.traverse((child) => {
-          if (child.isMesh && child.userData.originalPos) {
-            const offset = child.userData.direction.clone().multiplyScalar(explosionFactor * 3);
-            child.position.copy(child.userData.originalPos).add(offset);
-          }
-        });
+      // Rotate slowly if hologram
+      if (hologram) {
+        modelRef.current.rotation.y += 0.002;
       }
     }
   });
 
-  useEffect(() => {
-    if (!scene) return;
-    scene.traverse((child) => {
-      if (child.isMesh && !child.userData.originalPos) {
-        child.userData.originalPos = child.position.clone();
-        child.userData.direction = new THREE.Vector3(
-          (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 2
-        ).normalize();
-      }
-    });
-  }, [scene]);
-
-  return <primitive object={scene} ref={modelRef} scale={22} position={[0, 0, 0]} />;
+  return <primitive object={scene} ref={modelRef} scale={25} position={[0, -0.5, 0]} />;
 };
 
 const AtmosphericEffects = () => {
   const pointsRef = useRef();
-  
-  useFrame((state) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-    }
-  });
-
   const positions = useMemo(() => {
-    const p = new Float32Array(1000 * 3);
-    for (let i = 0; i < 1000; i++) {
-      p[i * 3] = (Math.random() - 0.5) * 20;
-      p[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      p[i * 3 + 2] = (Math.random() - 0.5) * 20;
+    const p = new Float32Array(1500 * 3);
+    for (let i = 0; i < 1500; i++) {
+      p[i * 3] = (Math.random() - 0.5) * 25;
+      p[i * 3 + 1] = (Math.random() - 0.5) * 25;
+      p[i * 3 + 2] = (Math.random() - 0.5) * 25;
     }
     return p;
   }, []);
+
+  useFrame((state) => {
+    if (pointsRef.current) {
+      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.01;
+    }
+  });
 
   return (
     <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
@@ -108,26 +87,26 @@ const AtmosphericEffects = () => {
   );
 };
 
-const NeonRings = () => {
+const NeonRings = ({ color }) => {
   const ringsRef = useRef();
   useFrame((state) => {
     if (ringsRef.current) {
       ringsRef.current.children.forEach((ring, i) => {
         ring.rotation.z = state.clock.elapsedTime * (0.05 + i * 0.02);
-        ring.scale.setScalar(1 + Math.sin(state.clock.elapsedTime * 0.5 + i) * 0.03);
+        ring.scale.setScalar(1 + Math.sin(state.clock.elapsedTime * 0.5 + i) * 0.05);
       });
     }
   });
 
   return (
     <group ref={ringsRef}>
-      {[...Array(4)].map((_, i) => (
+      {[...Array(3)].map((_, i) => (
         <mesh key={i} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[3 + i * 1.2, 0.005, 16, 100]} />
+          <torusGeometry args={[3.5 + i * 1.5, 0.005, 16, 100]} />
           <meshBasicMaterial 
-            color="#00f2ff" 
+            color={color} 
             transparent 
-            opacity={0.15 - i * 0.03} 
+            opacity={0.1 - i * 0.02} 
             blending={THREE.AdditiveBlending}
           />
         </mesh>
@@ -136,24 +115,21 @@ const NeonRings = () => {
   );
 };
 
-export const Headset3D = ({ mouse, explosionFactor = 0, color = "#0a0a0a", neonGlow = false }) => {
+export const Headset3D = ({ mouse, explosionFactor = 0, color = "#00f2ff", hologram = false }) => {
   return (
     <group>
       <AtmosphericEffects />
-      <NeonRings />
+      <NeonRings color={color} />
       
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.2}>
         <Suspense fallback={null}>
-          <Model mouse={mouse} explosionFactor={explosionFactor} color={color} neonGlow={neonGlow} />
+          <Model mouse={mouse} explosionFactor={explosionFactor} color={color} hologram={hologram} />
         </Suspense>
       </Float>
       
-      {/* Cinematic Lighting Suite */}
-      <ambientLight intensity={0.2} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={5} color="#00f2ff" castShadow />
-      <spotLight position={[-10, 5, 5]} angle={0.2} penumbra={1} intensity={2} color="#ffffff" />
-      <pointLight position={[0, 0, 5]} intensity={1} color="#00f2ff" />
-      <rectAreaLight width={10} height={10} position={[0, 0, -5]} intensity={3} color="#00f2ff" />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} color={color} />
+      <spotLight position={[-10, 10, 10]} intensity={0.5} color="#ffffff" />
     </group>
   );
 };
