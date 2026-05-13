@@ -27,16 +27,16 @@ export const ExplodedView = () => {
       {/* The High-fidelity Animation */}
       <ScrollSequence />
 
-      {/* Sticky Text Overlays */}
+      {/* Sticky Text Overlays - Adjusted Spacing to avoid covering the headset */}
       <div className="absolute inset-0 z-20 pointer-events-none">
-        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center px-4">
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-32 px-4">
           
           <motion.div 
             style={{ opacity: titleOpacity }}
-            className="text-center mb-20"
+            className="text-center mb-40"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-4 drop-shadow-2xl">Precision Engineering</h2>
-            <p className="text-gray-400 font-light text-lg">Every component designed for absolute perfection.</p>
+            <h2 className="text-5xl md:text-8xl font-bold mb-6 drop-shadow-2xl">Precision Engineering</h2>
+            <p className="text-gray-400 font-light text-xl tracking-wide">Every component designed for absolute perfection.</p>
           </motion.div>
 
           <motion.div 
