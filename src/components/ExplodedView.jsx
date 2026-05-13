@@ -23,7 +23,7 @@ export const ExplodedView = () => {
   const textOpacity2 = useTransform(scrollYProgress, [0.5, 0.6, 0.8, 0.9], [0, 1, 1, 0]);
 
   return (
-    <section ref={targetRef} className="relative">
+    <section ref={targetRef} className="relative h-[600vh]">
       {/* High-fidelity Image Sequence */}
       <ScrollSequence />
 
@@ -31,16 +31,7 @@ export const ExplodedView = () => {
       <div className="absolute inset-0 z-20 pointer-events-none">
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-4">
           
-          <motion.div 
-            style={{ opacity: textOpacity1 }}
-            className="max-w-4xl text-center"
-          >
-            <h2 className="text-sm tracking-[0.5em] text-neon-blue mb-4 uppercase font-bold">Internal Precision</h2>
-            <h3 className="text-6xl md:text-8xl font-bold mb-8 text-gradient leading-none uppercase">Deconstructed<br />Engineering</h3>
-            <p className="text-gray-400 text-xl font-light max-w-2xl mx-auto leading-relaxed">
-              Witness the symphony of components working in perfect harmony to create the world's most advanced silence.
-            </p>
-          </motion.div>
+
 
           <motion.div 
             style={{ opacity: textOpacity2 }}

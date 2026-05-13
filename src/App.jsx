@@ -11,6 +11,8 @@ import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 import { CartSidebar } from "./components/CartSidebar";
 import { CheckoutForm } from "./components/CheckoutForm";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
@@ -90,8 +92,6 @@ const SuccessModal = ({ isOpen, onClose, productName, customerName }) => (
   </AnimatePresence>
 );
 
-
-
 function App() {
   const [loading, setLoading] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -107,6 +107,8 @@ function App() {
     const saved = localStorage.getItem("sony-cart");
     return saved ? JSON.parse(saved) : [];
   });
+  
+  const [is3DVisible, setIs3DVisible] = useState(true);
   
   const explodedSectionRef = useRef();
   const cursorRef = useRef();
@@ -152,13 +154,10 @@ function App() {
   };
 
   useEffect(() => {
-
-    // Simulate loading
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2500);
 
-    // Custom Cursor logic
     const moveCursor = (e) => {
       const { clientX, clientY } = e;
       if (cursorRef.current && cursorDotRef.current) {
@@ -186,14 +185,25 @@ function App() {
 
     window.addEventListener("mousemove", moveCursor);
 
-    // Add hover listeners
     const interactables = document.querySelectorAll("button, a, .cursor-pointer");
     interactables.forEach((el) => {
       el.addEventListener("mouseenter", handleHover);
       el.addEventListener("mouseleave", handleUnhover);
     });
 
-    // Scroll trigger for explosion
+    ScrollTrigger.create({
+      id: "explodedTrigger",
+      trigger: "#exploded",
+      start: "top center",
+      end: "bottom center",
+      onToggle: (self) => updateVisibility()
+    });
+
+    const updateVisibility = () => {
+      const explodedActive = ScrollTrigger.getById("explodedTrigger")?.isActive;
+      setIs3DVisible(!explodedActive);
+    };
+
     if (explodedSectionRef.current) {
       ScrollTrigger.create({
         trigger: explodedSectionRef.current,
@@ -206,7 +216,6 @@ function App() {
       });
     }
 
-    // Fade in sections
     const sections = gsap.utils.toArray("section");
     sections.forEach((section) => {
       gsap.fromTo(
@@ -265,8 +274,6 @@ function App() {
         onCheckout={handleCheckout}
       />
 
-
-
       <motion.div 
         ref={cursorRef} 
         className="fixed top-0 left-0 pointer-events-none z-[999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
@@ -279,9 +286,13 @@ function App() {
       
       <Navbar cartCount={cart.length} onCartClick={() => setIsCartOpen(true)} />
       
-      <Suspense fallback={null}>
-        <Experience explosionFactor={explosionFactor} color={headsetColor} />
-      </Suspense>
+      <div className={`transition-opacity duration-1000 ${is3DVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <ErrorBoundary fallback={<div className="fixed inset-0 flex items-center justify-center bg-sony-black text-neon-blue text-center p-4">Model failed to load.<br/>Falling back to premium experience.</div>}>
+          <Suspense fallback={null}>
+            <Experience explosionFactor={explosionFactor} color={headsetColor} />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
       
       <div className={`relative z-10 ${loading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000`}>
         <div id="hero" className="relative z-10">
@@ -291,7 +302,7 @@ function App() {
         <div id="features" className="relative z-10">
           <Features />
         </div>
-        
+
         <div ref={explodedSectionRef} id="exploded" className="relative z-10">
           <ExplodedView />
         </div>
@@ -312,13 +323,12 @@ function App() {
           <Pricing onAddToCart={addToCart} onOrderNow={handleOrderNow} />
         </div>
 
-        
         <div className="relative z-10">
           <Footer />
         </div>
       </div>
 
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="fixed inset-0 pointer-events-none opacity-[0.05] z-[100] mix-blend-overlay noise" />
       <div className="fixed inset-0 pointer-events-none z-[50] bg-gradient-to-b from-black/20 via-transparent to-black/20" />
     </main>
   );

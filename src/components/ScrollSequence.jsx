@@ -95,12 +95,12 @@ export const ScrollSequence = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="h-[400vh] relative">
+    <div ref={containerRef} className="h-full w-full relative">
       <div className="sticky top-0 w-full h-screen overflow-hidden bg-black">
         <canvas ref={canvasRef} className="w-full h-full object-cover" />
         
         {/* Overlay for better integration */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sony-black via-transparent to-sony-black pointer-events-none opacity-40" />
       </div>
     </div>
   );

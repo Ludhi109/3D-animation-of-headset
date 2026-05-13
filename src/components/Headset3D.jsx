@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, Suspense, useMemo } from "react";
 import * as THREE from "three";
 
 // Using a stable pmndrs market URL
-const MODEL_URL = "https://vazxmixjsiawhamofvsi.supabase.co/storage/v1/object/public/models/headphone/model.gltf";
+const MODEL_URL = "https://raw.githubusercontent.com/antony-monu/react-three-fiber-headphones/main/public/models/headphones.glb";
 
 const Model = ({ mouse, explosionFactor, color }) => {
   const [modelError, setModelError] = useState(false);
@@ -146,26 +146,69 @@ const NeonRings = () => {
 };
 
 const Fallback = () => (
-  <group scale={1.5}>
+  <group scale={1.8} rotation={[0.2, 0.5, 0]}>
+    {/* Headband */}
     <mesh position={[0, 0, 0]}>
-      <torusGeometry args={[1, 0.08, 16, 100, Math.PI]} />
-      <meshStandardMaterial color="#00f2ff" emissive="#00f2ff" emissiveIntensity={5} />
+      <torusGeometry args={[1.2, 0.05, 32, 100, Math.PI]} />
+      <meshStandardMaterial 
+        color="#00f2ff" 
+        emissive="#00f2ff" 
+        emissiveIntensity={2} 
+        wireframe 
+        transparent 
+        opacity={0.8}
+      />
     </mesh>
-    <mesh position={[1, -0.6, 0]}>
-      <cylinderGeometry args={[0.5, 0.5, 0.3, 32]} />
-      <meshStandardMaterial color="#111" metalness={0.8} roughness={0.2} />
-    </mesh>
-    <mesh position={[-1, -0.6, 0]}>
-      <cylinderGeometry args={[0.5, 0.5, 0.3, 32]} />
-      <meshStandardMaterial color="#111" metalness={0.8} roughness={0.2} />
-    </mesh>
-    {/* Inner glow */}
-    <mesh position={[1, -0.6, 0.1]} scale={0.8}>
-      <circleGeometry args={[0.4, 32]} />
+    
+    {/* Left Earcup */}
+    <group position={[-1.2, -0.8, 0]} rotation={[0, 0, 0.2]}>
+      <mesh>
+        <cylinderGeometry args={[0.6, 0.6, 0.4, 32]} />
+        <meshStandardMaterial 
+          color="#111" 
+          metalness={0.9} 
+          roughness={0.1} 
+        />
+      </mesh>
+      <mesh position={[0, 0, 0.2]}>
+        <circleGeometry args={[0.55, 32]} />
+        <meshBasicMaterial color="#00f2ff" />
+      </mesh>
+      {/* Outer Ring */}
+      <mesh position={[0, 0, 0.21]}>
+        <ringGeometry args={[0.58, 0.62, 32]} />
+        <meshBasicMaterial color="#00f2ff" />
+      </mesh>
+    </group>
+
+    {/* Right Earcup */}
+    <group position={[1.2, -0.8, 0]} rotation={[0, 0, -0.2]}>
+      <mesh>
+        <cylinderGeometry args={[0.6, 0.6, 0.4, 32]} />
+        <meshStandardMaterial 
+          color="#111" 
+          metalness={0.9} 
+          roughness={0.1} 
+        />
+      </mesh>
+      <mesh position={[0, 0, 0.2]}>
+        <circleGeometry args={[0.55, 32]} />
+        <meshBasicMaterial color="#00f2ff" />
+      </mesh>
+      {/* Outer Ring */}
+      <mesh position={[0, 0, 0.21]}>
+        <ringGeometry args={[0.58, 0.62, 32]} />
+        <meshBasicMaterial color="#00f2ff" />
+      </mesh>
+    </group>
+
+    {/* Connections */}
+    <mesh position={[-1.2, -0.3, 0]} rotation={[0, 0, 0.3]}>
+      <cylinderGeometry args={[0.03, 0.03, 0.8, 8]} />
       <meshBasicMaterial color="#00f2ff" />
     </mesh>
-    <mesh position={[-1, -0.6, 0.1]} scale={0.8}>
-      <circleGeometry args={[0.4, 32]} />
+    <mesh position={[1.2, -0.3, 0]} rotation={[0, 0, -0.3]}>
+      <cylinderGeometry args={[0.03, 0.03, 0.8, 8]} />
       <meshBasicMaterial color="#00f2ff" />
     </mesh>
   </group>
