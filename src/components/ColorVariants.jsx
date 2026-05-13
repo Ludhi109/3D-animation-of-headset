@@ -9,12 +9,12 @@ const colors = [
 export const ColorVariants = ({ activeColor, onColorChange }) => {
   return (
     <section className="py-40 border-y border-white/5 relative overflow-hidden flex flex-col items-center">
-      {/* Background Full Headset Image */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none">
+      {/* Background Full Headset Image - High Visibility */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
         <img 
           src="https://www.sony.co.in/image/5d02da5df552836db894cead8afc2098?fmt=pjpeg&wid=1200&hei=470&bgcolor=F1F5F9&qlt=43" 
           alt="Headset Backdrop" 
-          className="w-full h-full object-contain mix-blend-screen"
+          className="w-full h-full object-contain scale-125 mix-blend-screen"
         />
       </div>
 

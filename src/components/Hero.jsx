@@ -68,10 +68,10 @@ export const Hero = () => {
         <img 
           src={heroImage} 
           alt="Sony WH-1000XM5" 
-          className="w-full h-[90vh] object-contain mix-blend-lighten relative z-10"
+          className="w-full h-[85vh] object-contain mix-blend-lighten relative z-10"
         />
         {/* Cinematic Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-sony-black via-sony-black/20 to-transparent z-0" />
+        <div className="absolute inset-0 bg-sony-black/20 z-0" />
       </motion.div>
 
       <div className="z-10 flex flex-col items-center mt-[-5vh]">
