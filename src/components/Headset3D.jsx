@@ -38,9 +38,9 @@ const Model = ({ mouse, explosionFactor, color, hologram }) => {
   }, [scene, color, hologram]);
 
   useFrame((state) => {
-    if (modelRef.current) {
-      const targetX = mouse.current[1] * 0.2;
-      const targetY = mouse.current[0] * 0.2;
+    if (modelRef.current && mouse && mouse.current) {
+      const targetX = (mouse.current[1] || 0) * 0.2;
+      const targetY = (mouse.current[0] || 0) * 0.2;
       modelRef.current.rotation.x = THREE.MathUtils.lerp(modelRef.current.rotation.x, targetX, 0.05);
       modelRef.current.rotation.y = THREE.MathUtils.lerp(modelRef.current.rotation.y, targetY, 0.05);
       

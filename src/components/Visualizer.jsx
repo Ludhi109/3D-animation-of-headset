@@ -101,14 +101,16 @@ export const Visualizer = () => {
                 style={{ backgroundColor: modes[activeMode].color }}
             />
 
-            <div className="w-full h-full cursor-grab active:cursor-grabbing">
-                <ErrorBoundary fallback={<div className="text-gray-500">Visualization Engine Offline</div>}>
-                    <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-                        <ambientLight intensity={0.5} />
+            <div className="w-full h-full cursor-grab active:cursor-grabbing min-h-[400px]">
+                <ErrorBoundary fallback={<div className="flex items-center justify-center h-full text-neon-blue/40 text-xs tracking-widest uppercase">System Standby</div>}>
+                    <Canvas camera={{ position: [0, 0, 8], fov: 45 }} gl={{ antialias: true }}>
+                        <ambientLight intensity={0.7} />
+                        <pointLight position={[10, 10, 10]} intensity={1} />
                         <Suspense fallback={null}>
                             <Headset3D 
                                 mouse={{ current: [0, 0] }} 
                                 color={modes[activeMode].color} 
+                                key={activeMode} // Force re-render on mode change to ensure color updates
                             />
                         </Suspense>
                     </Canvas>
