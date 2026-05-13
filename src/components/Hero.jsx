@@ -34,8 +34,26 @@ export const Hero = () => {
       ref={containerRef} 
       className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black"
     >
-      {/* Cinematic Atmosphere */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,255,0.1)_0%,transparent_80%)]" />
+      {/* Technical Schematic Background Layer */}
+      <div className="absolute inset-0 z-0">
+        {/* Deep Atmosphere Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,255,0.12)_0%,transparent_80%)]" />
+        
+        {/* Glowing Horizon Line (from screenshot) */}
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neon-blue/40 to-transparent shadow-[0_0_20px_#00f2ff]" />
+
+        {/* Tech Accents (Diagonal lines from screenshot) */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 255, 0.2)" strokeWidth="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        </div>
+      </div>
 
       {/* Holographic 3D Headset - Centered & Background Layer */}
       <div className="absolute inset-0 z-0">
