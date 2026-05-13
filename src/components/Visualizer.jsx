@@ -34,7 +34,7 @@ export const Visualizer = () => {
   ];
 
   return (
-    <section id="visualizer" className="py-60 bg-black relative overflow-hidden">
+    <section id="visualizer" className="py-32 bg-black relative overflow-hidden">
       {/* Custom Background Image */}
       <div className="absolute inset-0 z-0 opacity-20">
         <img 
