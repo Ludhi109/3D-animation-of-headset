@@ -186,23 +186,27 @@ function App() {
     window.addEventListener("mousemove", moveCursor);
 
     const interactables = document.querySelectorAll("button, a, .cursor-pointer");
-    interactables.forEach((el) => {
-      el.addEventListener("mouseenter", handleHover);
-      el.addEventListener("mouseleave", handleUnhover);
-    });
+    const handleMouseMove = (e) => {
+      mouse.current = [
+        (e.clientX / window.innerWidth) * 2 - 1,
+        (e.clientY / window.innerHeight) * 2 - 1,
+      ];
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove);
 
-    // Visibility and Animation Logic
     const updateVisibility = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      // Dynamic visibility based on scroll position
-      const isHeroActive = scrollY < windowHeight * 0.5;
-      setIs3DVisible(!isHeroActive);
+      // Keep 3D model visible across the experience for a consistent premium feel
+      setIs3DVisible(true);
     };
 
     window.addEventListener("scroll", updateVisibility);
     updateVisibility();
+
+    interactables.forEach((el) => {
+      el.addEventListener("mouseenter", handleHover);
+      el.addEventListener("mouseleave", handleUnhover);
+    });
 
     // The explosion effect is now handled within the ExplodedView section itself or via this ref
     if (explodedSectionRef.current) {
