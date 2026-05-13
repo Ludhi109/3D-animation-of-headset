@@ -3,12 +3,18 @@ import { ShoppingBag } from "lucide-react";
 
 export const Navbar = ({ cartCount = 0, onCartClick }) => {
   const scrollToSection = (id) => {
-    console.log(`Scrolling to ${id}`);
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    } else {
-      console.warn(`Element with id ${id} not found`);
+      const offset = 100; // Account for navbar height
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 

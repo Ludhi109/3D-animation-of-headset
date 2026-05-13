@@ -300,19 +300,19 @@ function App() {
       </div>
       
       <div className={`relative z-10 ${loading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000`}>
-        <div id="hero" className="relative z-10">
+        <div id="hero" className="relative z-10 mb-40">
           <Hero />
         </div>
         
-        <div id="features" className="relative z-10">
+        <div id="features" className="relative z-10 py-40">
           <Features />
         </div>
 
-        <div id="exploded" className="relative z-10 mb-40">
+        <div id="exploded" className="relative z-10 mb-60">
           <ExplodedView />
         </div>
         
-        <div id="visualizer" className="relative z-10 py-20">
+        <div id="visualizer" className="relative z-10 py-40">
           <Visualizer />
         </div>
         
