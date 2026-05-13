@@ -65,12 +65,15 @@ export const Visualizer = () => {
             </motion.p>
           </AnimatePresence>
           
-          <div className="flex gap-8">
+          <div className="flex gap-8 relative z-20 pointer-events-auto">
             {modes.map((item, i) => (
               <button 
                 key={i} 
-                onClick={() => setActiveMode(i)}
-                className="flex flex-col items-center gap-4 group outline-none"
+                onClick={() => {
+                  console.log("Switching mode to:", i);
+                  setActiveMode(i);
+                }}
+                className="flex flex-col items-center gap-4 group outline-none cursor-pointer"
               >
                 <motion.div 
                   animate={{ 
