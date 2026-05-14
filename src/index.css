@@ -3,14 +3,16 @@
 @theme {
   --color-neon-blue: #00f2ff;
   --color-sony-black: #050505;
-  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-sony-gray: #121212;
+  --color-glass: rgba(255, 255, 255, 0.03);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
   
+  --font-outfit: "Outfit", sans-serif;
   --font-inter: "Inter", sans-serif;
 }
 
 :root {
   color-scheme: dark;
-  background-color: var(--color-sony-black);
   font-family: var(--font-inter);
 }
 
@@ -22,42 +24,188 @@ html {
 body {
   margin: 0;
   overflow-x: hidden;
-  background: var(--color-sony-black);
   color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sony-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-blue);
 }
 
 canvas {
   touch-action: none;
 }
 
-/* Glassmorphism Utility */
+/* Glassmorphism Utility - Refined for Ultra-Premium Feel */
 .glass {
-  background: var(--color-glass);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(40px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #00f2ff 100%);
+  background: linear-gradient(to right, #ffffff, #00f2ff, #ffffff);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
 }
 
 .neon-glow {
-  box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
 }
 
 .neon-text-glow {
-  text-shadow: 0 0 10px rgba(0, 242, 255, 0.8);
+  text-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
 }
 
 .noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   filter: contrast(120%) brightness(120%);
+  opacity: 0.05;
+}
+
+.mask-radial {
+  mask-image: radial-gradient(circle, black 50%, transparent 100%);
+}
+
+.cinematic-vignette {
+  background: radial-gradient(circle, transparent 30%, black 100%);
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+/* Holographic UI Elements */
+.hologram-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.hologram-border::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 242, 255, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: hologram-sweep 3s ease-in-out infinite;
+}
+
+@keyframes hologram-sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.energy-line {
+  background: linear-gradient(90deg, transparent, var(--color-neon-blue), transparent);
+  height: 1px;
+  width: 100%;
+  opacity: 0.3;
+  box-shadow: 0 0 10px var(--color-neon-blue);
+}
+
+.glow-point {
+  width: 4px;
+  height: 4px;
+  background: var(--color-neon-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--color-neon-blue);
+}
+
+/* Radiating Rings Animation */
+@keyframes radiate {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-radiate {
+  animation: radiate 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Cyan/Teal Glow for BUY NOW Button */
+.buy-now-glow {
+  background: linear-gradient(90deg, #00f2ff, #00d4ff);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.4), 
+              0 0 40px rgba(0, 242, 255, 0.2);
+  transition: all 0.5s ease;
+}
+
+.buy-now-glow:hover {
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.6), 
+              0 0 60px rgba(0, 242, 255, 0.3);
+  transform: scale(1.05);
+}
+
+/* Premium Typography refinements */
+.tracking-cinematic {
+  letter-spacing: -0.02em;
+}
+
+.tracking-ultra-wide {
+  letter-spacing: 0.5em;
+}
+
+/* Ensure background visibility */
+section {
+  position: relative;
+  z-index: 10;
+  background: transparent !important;
+}
+
+#hero, #showcase, #features, #visualizer, #uses, #pricing, #precision {
+  background: transparent !important;
+}
+
+.bg-sony-black {
+  background-color: var(--color-sony-black);
 }

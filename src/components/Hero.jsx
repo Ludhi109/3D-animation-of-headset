@@ -1,101 +1,86 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import heroImage from "../assets/hero-premium.png";
+import heroImage from "../assets/premium-bg.png";
 
 export const Hero = () => {
-  const containerRef = useRef();
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-text", {
-        opacity: 0,
-        y: 80,
-        duration: 1.5,
-        ease: "power4.out",
-        stagger: 0.2
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: "smooth"
+      });
     }
   };
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black"
-    >
-      {/* Cinematic Background Layer */}
+    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+      {/* Background Cinematic Elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,255,0.15)_0%,transparent_70%)]" />
-        
-        {/* Glowing Horizon Line (Matching Reference) */}
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neon-blue/60 to-transparent shadow-[0_0_25px_#00f2ff]" />
-
-        {/* Premium Static Headset Visual - Centerpiece */}
-        <motion.div 
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.8 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
-            <img 
-                src={heroImage} 
-                alt="Sony WH-1000XM5 Premium" 
-                className="w-full h-full object-contain mix-blend-screen opacity-60"
-            />
-        </motion.div>
+        <div className="absolute top-[20%] left-[10%] w-[30%] h-[30%] bg-neon-blue/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[20%] right-[10%] w-[30%] h-[30%] bg-neon-blue/5 rounded-full blur-[120px] animate-pulse delay-700" />
       </div>
 
-      {/* Hero UI - Ultra-Clean Spacious Layout */}
-      <div className="relative z-10 flex flex-col items-center justify-between h-screen w-full px-4 pt-32 pb-24">
-        <motion.div className="flex flex-col items-center">
-            <motion.h1 
-            className="hero-text text-[10vw] md:text-[8rem] font-bold tracking-tighter leading-none text-white mb-12 drop-shadow-[0_0_80px_rgba(255,255,255,0.1)]"
-            >
-            WH-1000XM5
-            </motion.h1>
+      {/* Main Product Image (Full Headset) */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.8, y: 50 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 1.5, ease: "circOut" }}
+        className="absolute inset-0 flex items-center justify-center z-1 pointer-events-none"
+      >
+        <img 
+          src="/bg-sequence/ezgif-frame-240.jpg" 
+          alt="Sony WH-1000XM5 Wireframe" 
+          className="w-full max-w-5xl h-auto object-contain opacity-60 brightness-150"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-sony-black via-transparent to-sony-black opacity-60" />
+      </motion.div>
 
-            <motion.div className="hero-text max-w-2xl px-12 py-10 rounded-[3rem] bg-black/40 backdrop-blur-md border border-white/10">
-            <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed text-center">
-                Immerse yourself in a world of pure sound. Precision engineered <br className="hidden md:block" /> 
-                for those who demand nothing but absolute perfection.
-            </p>
-            </motion.div>
+      <div className="relative z-10 text-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          <h2 className="text-neon-blue text-[10px] tracking-[1.5em] font-black uppercase mb-8 neon-text-glow">
+            Evolution of Sound
+          </h2>
+          <h1 className="text-7xl md:text-[10rem] font-black tracking-tighter leading-none mb-12">
+            SONY <span className="text-neon-blue">XM5</span>
+          </h1>
+          <p className="max-w-xl mx-auto text-gray-400 text-lg md:text-xl font-light tracking-wide leading-relaxed mb-12">
+            Immersive silence. Exceptional sound. The pinnacle of wireless noise-cancelling technology.
+          </p>
         </motion.div>
 
-        <motion.div className="hero-text flex flex-col md:flex-row gap-16 items-center mb-12">
-          <button 
-            onClick={() => scrollToSection("pricing")}
-            className="px-12 py-5 bg-neon-blue text-black font-bold rounded-full hover:scale-105 transition-all shadow-[0_0_60px_rgba(0,242,255,0.5)] uppercase tracking-widest text-xs"
-          >
-            Pre-order Now
-          </button>
-          
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="flex gap-8 justify-center pointer-events-auto"
+        >
           <button 
             onClick={() => scrollToSection("visualizer")}
-            className="px-12 py-5 glass text-white font-medium rounded-full border border-white/20 hover:bg-white/10 transition-all flex items-center gap-4 group"
+            className="px-10 py-5 bg-white text-black font-bold uppercase tracking-widest text-[10px] rounded-full hover:bg-neon-blue transition-all duration-500 shadow-[0_0_30px_rgba(255,255,255,0.1)] cursor-pointer"
           >
-            <span className="uppercase tracking-widest text-xs">Watch Film</span>
-            <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-neon-blue transition-colors">
-              <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[8px] border-l-white border-b-[4px] border-b-transparent ml-1" />
-            </div>
+            Experience Now
+          </button>
+          <button 
+            onClick={() => scrollToSection("showcase")}
+            className="px-10 py-5 border border-white/10 glass text-white font-bold uppercase tracking-widest text-[10px] rounded-full hover:border-neon-blue transition-all duration-500 cursor-pointer"
+          >
+            View Details
           </button>
         </motion.div>
       </div>
 
-      {/* Aesthetic Accents - Absolute Bottom */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-20">
-        <span className="text-[8px] tracking-[0.5em] text-neon-blue uppercase font-bold">Explore the Craft</span>
-        <div className="w-[1px] h-4 bg-gradient-to-b from-neon-blue to-transparent animate-pulse" />
-      </div>
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <span className="text-[8px] tracking-[0.5em] text-gray-500 uppercase font-bold">Scroll to Explore</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-neon-blue to-transparent" />
+      </motion.div>
     </section>
   );
 };

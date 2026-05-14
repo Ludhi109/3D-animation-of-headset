@@ -10,6 +10,19 @@ const colors = [
 export const ColorVariants = ({ activeColor, onColorChange }) => {
   return (
     <section className="py-40 border-y border-white/5 relative overflow-hidden flex flex-col items-center">
+      {/* Radiating Neon Rings */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+        {[...Array(4)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-1/2 left-1/2 w-[600px] h-[600px] border border-neon-blue/20 rounded-full animate-radiate"
+            style={{ animationDelay: `${i * 1}s` }}
+          />
+        ))}
+        {/* Glow behind the headset */}
+        <div className="absolute w-[400px] h-[400px] bg-neon-blue/10 rounded-full blur-[100px]" />
+      </div>
+
       {/* Custom Background Image - High Visibility */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
         <img 
